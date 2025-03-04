@@ -18,5 +18,6 @@ plot(b2, col = cl) # rapresento l'immagine con la nuova scala di colori
 # osserviamo che tutti gli oggetti che riflettono il blu avranno delle tonalità chiare, tendente al grigio chiaro
 
 # Esercizio: creare la propria palette
+# sito per colori: https://sites.stat.columbia.edu/tzheng/files/Rcolor.pdf
 blue = colorRampPalette(c("navy", "royalblue1", "paleturquoise1"))(100)
 plot(b2, col =  blue)
