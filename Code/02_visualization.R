@@ -80,3 +80,31 @@ library (viridis)
 # Esempio di plot con viridis
 plot(sentdol, col = viridis(100))
 plot(sentdol, col = mako(100))
+
+# numero di bande
+nlyr(sentdol)
+# numero di pixel/celle
+ncell(sentdol)
+# numero di pixel * numero di celle
+nlyr(sentdol)*ncell(sentdol)
+
+# colori bande 
+# 1 = blue (b1)
+# 2 = green (b2)
+# 3 = red (b3)
+# 4 = NIR (b8)
+
+# vogliamo fare un plot con più colori
+# dentro imageRy abbiamo una funzione apposita che vuole il nome dell'immagine e i filtri che ci servono cioè le nostre bande
+im.plotRGB(sentdol, r = 3, g = 2, b = 1) # restituisce una immagine a colori naturali (Natural Colors) poichè abbiamo associato ad ogni colore la banda corrispondente 
+
+# andiamo a creare una immagine a falsi colori usando la banda del NIR
+im.plotRGB(sentdol, r = 4, g = 3, b = 2) # andiamo a traslare tutte le bande di uno, togliendo quella del blu che restituisce poche informazioni, e mettendo quella del NIR
+# avendo messo nel colore rosso il NIR, andremo a visualizare in rosso le piante (poichè assorbono il NIR)
+
+# Esercizio: variamo l'immagine in modo che la banda NIR sia nella componente green
+im.plotRGB(sentdol, r = 3, g = 4, b = 2)
+
+# mettiamo il NIR nel blu --> solitamente viene usato per osservare il suolo che diventa giallo in questo caso
+im.plotRGB(sentdol, r = 3, g = 2, b = 4)
+
