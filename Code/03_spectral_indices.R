@@ -37,4 +37,48 @@ im.plotRGB(mato2006, r = 2, g = 3, b = 1, title = "Mato Grosso 2006")
 plot(mato1992[[1]], col = inferno(100))
 plot(mato2006[[1]], col = inferno(100))
 # vediamo come la risoluzione delle due immagini è diversa: questo dipende dal bit.
+
 # DVI
+# importiamo l'immagine del 2006
+# mato2006 <- im.import("matogrosso_ast_2006209_lrg")
+
+# Esercizio: plottare l'immagine del 2006 con il NIR nel verde:
+im.plotRGB(mato2006, 2, 1, 3)
+# Esercizio: plottare l'immagine del 2006 con il NIR nel blu:
+im.plotRGB(mato2006, 2, 3, 1)
+
+# Esercizio: plottare le due immagini assieme:
+par(mfrow=c(1,2))
+im.plotRGB(mato1992, 1, 2, 3)
+im.plotRGB(mato2006, 1, 2, 3)
+dev.off()
+
+# Calcoliamo il DVI
+# DVI 1992
+dvi1992 = mato1992[[1]] - mato1992[[2]]
+dvi1992
+cl <- colorRampPalette(c("darkblue", "yellow", "red", "black"))(100) # gli diamo una palette
+plot(dvi1992, col=cl)
+
+# DVI 2006
+dvi2006 = mato2006[[1]] - mato2006[[2]]
+dvi2006
+cl <- colorRampPalette(c("darkblue", "yellow", "red", "black"))(100) 
+plot(dvi2006, col=cl)
+
+# Possiamo calcolarlo più velocemente da imageRy:
+dvi1992i <- im.dvi(mato1992, 1, 2)
+dvi2006i <- im.dvi(mato2006, 1, 2)
+
+
+# NDVI
+ndvi1992 = (mato1992[[1]] - mato1992[[2]]) / (mato1992[[1]] + mato1992[[2]])
+ndvi2006 = (mato2006[[1]] - mato2006[[2]]) / (mato2006[[1]] + mato2006[[2]])
+par(mfrow=c(1,2))
+plot(ndvi1992, col=cl)
+plot(ndvi2006, col=cl)
+dev.off()
+
+# scientifically meaningful image for everyone!
+clvir <- colorRampPalette(c("violet", "dark blue", "blue", "green", "yellow"))(100)
+plot(ndvi2006, col=clvir)
