@@ -27,6 +27,38 @@ ENdif = EN_01[[1]]-EN_13[[1]] # differenza tra i primi due livelli delle immagin
 plot(ENdif)
 plot(ENdif, col = inferno(100)) # le zone molto gialle rappresentano quelle in cui c'è stata una netta diminuzione
 
-# ora usiamo un dataset completo
-im-import()
+# ora usiamo un dataset completo --> dati di temperatura dello scioglimento dei ghiacci della Groenlandia (programma COPERNICUS) 
+gr = im.import("greenland")
+plot(gr) # notiamo un abbassamento delle temperature della calotta di ghiaccio dal 2000 al 2015
+gr # restituisce i valori del dataset di immagini 
+# plottiamo l'immagine del 2000 e del 2015
+im.multiframe(1, 2)
+plot(gr[[1]], col = rocket(100))
+plot(gr[[4]], col = rocket(100))
+dev.off()
+# facciamo la differenza tra le due
+grdif = gr[[1]]-gr[[4]]
+plot(grdif)
+
+# proviamo ad esportare il dato con il set working directory (cartella di riferimento)
+setwd("C://Users/maria/OneDrive/Desktop/UNI/MAGISTRALE/Telerilevamento in R/Immagini_esportate") # dobbiamo stare attenti a non usare un backslash "\" ma quelli dritti
+getwd() # per controllare che tutto sia giusto
+
+# CREIAMO L'IMMAGINE:
+# creiamo il file
+png("greenland_output.png") # crea un file png all'interno della cartella di riferimento
+# ci plottiamo dentro l'immagine che vogliamo con un plot
+plot(gr)
+# chiudiamo il file
+dev.off()
+
+# possiamo usare anche altri tipi di file: pdf(), tif(), jpeg() ecc...
+pdf("greenland_dif.pdf") # pdf dell'immagine della differenza tra le due immagini --> non perde di qualità
+plot(grdif)
+dev.off()
+
+
+
+
+
 
