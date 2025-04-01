@@ -57,8 +57,34 @@ pdf("greenland_dif.pdf") # pdf dell'immagine della differenza tra le due immagin
 plot(grdif)
 dev.off()
 
+# Esercizio: importare i dati dell'NDVI dal Seninel
+ndvi = im.import("Sentinel2_NDVI")
+im.ridgeline(ndvi, scale=2)
 
+# Cambiamo i nomi
+# sources     : Sentinel2_NDVI_2020-02-21.tif  
+#               Sentinel2_NDVI_2020-05-21.tif  
+#               Sentinel2_NDVI_2020-08-01.tif  
+#               Sentinel2_NDVI_2020-11-27.tif  
 
+names(ndvi) = c("02_Feb", "05_May", "08_Aug", "11_Nov")
+im.ridgeline(ndvi, scale=2)
+im.ridgeline(ndvi, scale=2, palette="mako")
 
+pairs(ndvi)
 
+plot(ndvi[[1]], ndvi[[2]])
+# y = x # may y, feb x
+# y = a + bx
+# a=0, b=1
+# y = a + bx = 0 + 1x = x
+abline(0, 1, col="red")
 
+plot(ndvi[[1]], ndvi[[2]], xlim=c(-0.3,0.9), ylim=c(-0.3, 0.9))
+abline(0, 1, col="red")
+
+im.multiframe(1,3)
+plot(ndvi[[1]])
+plot(ndvi[[2]])
+plot(ndvi[[1]], ndvi[[2]], xlim=c(-0.3,0.9), ylim=c(-0.3, 0.9))
+abline(0, 1, col="red")
