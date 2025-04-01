@@ -1,6 +1,8 @@
 # richiamiamo i pacchetti
 library(imageRy)
 library(terra)
+library(ggplot2)
+library(patchwork)
 
 im.list()
 
@@ -40,5 +42,36 @@ perc1992 = prop1992*100
 #andiamo a calcolarlo per la seconda immagine:
 tot2006 = ncell(mato2006c)
 perc2006 = freq(mato2006c)*100/ tot2006 # abbiamo rifatto lo stesso calcolo ma più velocemente
-# antropico = 54%
+# antropico = 55%
 # foresta =  45%
+
+# andiamo a usare il pacchetto ggplot2 per creare dei grafici
+
+# creiamo un dataframe (tabella):
+class = c("Forest", "Human")
+y1992 = c(83, 17)
+y2006 = c(45, 55)
+tabout = data.frame(class, y1992, y2006)
+tabout # visualizziamo la tabellina appena creata
+
+# andiamo a plottare la tabella:
+# il parametro aes (aesthetic) definisce cosa va nella x, cosa nella y e il colore
+p1 =ggplot(tabout, aes(x = class, y = y1992, color = class)) + 
+      geom_bar(stat = "identity", fill = "white") + # definisce un grafico con barre (istogramma)
+        ylim(c(0, 100))
+
+p2 = ggplot(tabout, aes(x = class, y = y2006, color = class)) +
+      geom_bar(stat= "identity", fill = "white")+
+        ylim(c(0, 100))
+
+# possiamo andare ad unire dei grafici fatti con ggplo con la funzione del pacchetto patchwork (i grafici devono essere associati a degli oggetti)
+p1 + p2 # abbiamo il problema che non hanno la stessa scala (lo risolviamo nei plot di prima con la funzione ylim)
+# otteniamo un grafico riscalato
+
+# possiamo anche metterli uno sopra l'altro usando il /
+p1 / p2
+
+# mettiamo insieme le immagini e i grafici
+p0 = im.ggplot(mato1992) # plotta solo la prima banda
+p00 = im.ggplot(mato2006)
+p0 + p00 + p1 + p2
