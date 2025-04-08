@@ -75,3 +75,51 @@ p1 / p2
 p0 = im.ggplot(mato1992) # plotta solo la prima banda
 p00 = im.ggplot(mato2006)
 p0 + p00 + p1 + p2
+
+
+classall = c("Forest1992","Human1992","Forest2006","Human2006")
+percentage = c(83,17,45,55)
+all = data.frame(classall, percentage)
+dev.off()
+
+# Mettiamo insieme un barplot con più gruppi
+ggplot(data=all, aes(x=classall, y=percentage, color=classall)) +
+  geom_bar(stat="identity", fill="white")
+
+#Solar Orbiter
+# importiamo il file che ci serva
+im.list()
+solar = im.import("Solar_Orbiter_s_first_views_of_the_Sun_pillars.jpg")
+
+# ESERCIZIO: classifichiamo l'immagine in tre classi - im.classify()
+solarc = im.classify(solar, num_clusters=3)
+
+# Plottiamo l'immagine originale vicino a quella classificata
+im.multiframe(1,2)
+plot(solar)
+plot(solarc)
+dev.off()
+# 3 = basso
+# 1 = medio
+# 2 = alto
+
+solarcs = subst(solarc, c(3,1,2), c("c1_low","c2_medium","c3_high"))
+plot(solarcs)
+
+# ESERCIZIO: calcolare la percentuale delle classi di energia solare con una riga di codice:
+percsolar = freq(solarcs)$count * 100 / ncell(solarcs)
+# 37.92693 41.04342 21.02965
+# le arrotondiamo a 38 41 21
+
+# creiamo un dataframe con le classi
+class = c("c1_low","c2_medium","c3_high")
+# controlliamo i nomi degli oggetti
+perc = c(38,41,21)
+tabsol = data.frame(class, perc)
+
+# plottiamo un ggplot finale
+ggplot(tabsol, aes(x=class, y=perc, fill=class, color=class)) +
+  geom_bar(stat="identity") +
+#  ylim(c(0,100)) 
+  coord_flip() 
+# + scale_y_reverse()
