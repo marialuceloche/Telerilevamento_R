@@ -18,6 +18,7 @@ Dal punto di vista geomorfologico, il delta del Po è un delta fluvio-influenzat
 Il fiume controlla quindi l'apporto sedimentario mentre la corrente lungo costa regola la dispersione e ridistribuzione del sedimento nell'Adriatico.
 
 <img width="1247" height="915" alt="Po" src="https://github.com/user-attachments/assets/88cbf6d5-dbb4-4120-8154-10d2e9e0e5c1" />
+_Figura 1 - Zoom sulla terminazione del fiume Po alla scala regionale._
 
 La torbidità dell'acqua è legata alla concentrazione di sedimenti in sospensione, fortemente influenzata dalle condizioni metereologiche e idrologiche: periodi con precipitazioni intense o ricorrenti determinano una maggiore erosione del bacino e quindi un maggiore apporto a mare creando una maggiore torbidità, viceversa in periodi di secca o con scarse precipitazioni osserveeremo un'acqua più pulita.
 
@@ -81,7 +82,7 @@ dev.off()
 # =============================================
 ```
 <img width="2000" height="2000" alt="Multiframe_ColoriNaturali" src="https://github.com/user-attachments/assets/07e6539a-c982-4611-9a64-0bd98ecde2a2" />
-_Figura 1 - Multiframe a colori naturali del Delta del Po per i 4 casi presi in considerazione._
+_Figura 2 - Multiframe a colori naturali del Delta del Po per i 4 casi presi in considerazione._
 
 
 Per andare ad osservare meglio il contrasto tra acqua e sedimento sono state poi create le immagini a falsi colori andando a sostituire il NIR al blu. Questa operazione permette di visualizzare l'acqua limpida con un colore scuro mentre il sedimento con colori brillanti:
@@ -94,7 +95,7 @@ im.plotRGB(NOV_2025, r = 3, g = 2, b = 4, title = "Novembre 2025")
 dev.off()
 ```
 <img width="2000" height="2000" alt="Multiframe_FalsiColori" src="https://github.com/user-attachments/assets/c6b8a7d8-e1d5-462a-9d61-c593560984e0" />
-_Figura 2 - Multiframe a falsi colori (NIR al posto della banda 2 del blu) per far risaltare il plume di sedimento alla foce del Po._
+_Figura 3 - Multiframe a falsi colori (NIR al posto della banda 2 del blu) per far risaltare il plume di sedimento alla foce del Po._
 
 > [!NOTE]
 > Tutte le immagini sono state esportate usando la funzione _png()_ e _dev.off()_
@@ -144,7 +145,7 @@ plot(final_2022)
 dev.off()
 ```
 <img width="2000" height="1000" alt="Confronto_2022" src="https://github.com/user-attachments/assets/83d15147-f5a1-4f83-8667-5abd648e7eae" />
-_Figura 3 - Confronto tra l'immagine satellitare e il plume ottenuto attraverso il prodotto NDTI x NDWI_
+_Figura 4 - Confronto tra l'immagine satellitare e il plume ottenuto attraverso il prodotto NDTI x NDWI_
 
 Per mettere in evidenza i sedimenti dei 4 casi, sono stati aggiunti con la funzione _add = T_ i plume alle immagini satellitari nella seguente maniera.
 ``` r
@@ -154,7 +155,7 @@ plot(final_2022, add = T, alpha = 1)
 ```
 Il risultato per tutti i casi studio è il seguente:
 <img width="3000" height="3000" alt="Plume_multiframe" src="https://github.com/user-attachments/assets/052816a0-181a-4e88-aa68-53dc7ee31546" />
-_Figura 4 - Immagini satellitari con in evidenza i plume ottenuti dal prodotto NDTI x NDWI._
+_Figura 5 - Immagini satellitari con in evidenza i plume ottenuti dal prodotto NDTI x NDWI._
 
 Per andare ad osservare come varia la torbidità è stata effetturata una classificazione dei pixel ottenuti dal calcolo del NDTI. Questa operazione ha lo scopo di ottenere una valutazione dei pixel in 4 classi di torbidità (bassa, medio-bassa, medio-alta e alta) in percentuale.
 
@@ -193,7 +194,7 @@ g1 = ggplot(tabella, aes(x = classe, y = perc_2022, fill = classe)) +
   theme(legend.position="none")
 ```
 <img width="2000" height="2000" alt="Grafici_Torbidità" src="https://github.com/user-attachments/assets/0af3d22f-a1bb-4616-85e5-10afd44fd278" />
-_Figura 5 - Istogrammi delle classi di torbidità ottenute dalla classificazione dell'indice NDTI._
+_Figura 6 - Istogrammi delle classi di torbidità ottenute dalla classificazione dell'indice NDTI._
 
 Infine, per andare ad osservare come cambia la torbidità in base alla stagionalità, è stata effettuata una analisi multitemporale tra inverno ed estate 2025:
 ``` r
@@ -217,7 +218,7 @@ mtext("Differenza NDTI inverno - estate 2025",
 dev.off()
 ```
 <img width="2000" height="1000" alt="Differenza_NDTI_2025" src="https://github.com/user-attachments/assets/bb9f9918-d65f-4ce8-9b23-f456bc0c5ba1" />
-_Figura 6 - Analisi multitemporale rapresentante la differenza di torbidità tra inverno ed estate 2025._
+_Figura 7 - Analisi multitemporale rapresentante la differenza di torbidità tra inverno ed estate 2025._
 
 ## 5 - Conclusioni
 In conclusione possiamo affermare che l'analisi condotto ha permesso di evidenziare la dinamica spaziale e temporale del plume di sedimenti del Po attraverso l'ultilizzo di immagini Sentinel-2 ed indici spettrali.
