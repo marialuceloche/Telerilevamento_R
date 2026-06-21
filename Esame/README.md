@@ -25,7 +25,7 @@ Per cui la distribuzione dei sedimenti sospesi nel delta del Po è il risultato 
 Lo scopo di questo progetto è la mappatura del sedimento in sospensione in 4 immagini multispettrali del Sentinel 2. Le immagini sono state scelte per osservare sia la variabilità stagionale (estate e inverno del 2025) sia due casi studio eccezionali quali una alluvione (Maggio 2023) e una secca (Agosto 2022).
 Allo scopo di mappare i plume di sedimento sono stati usati diversi indici quali NDWI, NDTI e la combinazione dei due.
 
-## 3- Dati
+## 3 - Dati
 Le immagini satellitari del Landsat-2 usate sono state scaricate dal portale [Copernicus](https://browser.dataspace.copernicus.eu/) in funzione del periodo scelto. 
 Nello specifico le date usate sono:
 - 11/08/2022
@@ -79,7 +79,7 @@ dev.off()
 # =============================================
 ```
 <img width="2000" height="2000" alt="Multiframe_ColoriNaturali" src="https://github.com/user-attachments/assets/07e6539a-c982-4611-9a64-0bd98ecde2a2" />
-Figura 1 - Multiframe a colori naturali del Delta del Po per i 4 casi presi in considerazione
+*Figura 1 - Multiframe a colori naturali del Delta del Po per i 4 casi presi in considerazione*
 
 Per andare ad osservare meglio il contrasto tra acqua e sedimento sono state poi create le immagini a falsi colori andando a sostituire il NIR al blu. Questa operazione permette di visualizzare l'acqua limpida con un colore scuro mentre il sedimento con colori brillanti:
 ``` r
@@ -92,13 +92,13 @@ dev.off()
 ```
 <img width="2000" height="2000" alt="Multiframe_FalsiColori" src="https://github.com/user-attachments/assets/c6b8a7d8-e1d5-462a-9d61-c593560984e0" />
 
-Figura 2 - Multiframe a falsi colori (NIR al posto della banda 2 del blu) per far risaltare il plume di sedimento alla foce del Po.
+*Figura 2 - Multiframe a falsi colori (NIR al posto della banda 2 del blu) per far risaltare il plume di sedimento alla foce del Po.*
 
 >NOTA:
 >Tutte le immagini sono state esportate usando la funzione *png()* e *dev.off()*
 >
 
-**4. Mappatura dei plume
+**4 - Mappatura dei plume
 Per andare ad estrapolare il plume dalle immagini satellitari sono stai usati due indici principali:
 
 *** NDWI (Normalized Difference Water Index)
@@ -141,7 +141,8 @@ im.plotRGB(AGO_2022, r = 3, g = 2, b = 1)
 plot(final_2022)
 dev.off()
 ```
-<img width="2000" height="2000" alt="Confronto_2022" src="https://github.com/user-attachments/assets/235ffbe7-d759-45b5-93fa-08a095494c43" />
+<img width="2000" height="1000" alt="Confronto_2022" src="https://github.com/user-attachments/assets/83d15147-f5a1-4f83-8667-5abd648e7eae" />
+*Figura 3 - Confronto tra l'immagine satellitare e il plume ottenuto attraverso il prodotto NDTI x NDWI*
 
 Per mettere in evidenza i sedimenti dei 4 casi, sono stati aggiunti con la funzione *add = T* i plume alle immagini satellitari nella seguente maniera.
 ``` r
@@ -150,4 +151,73 @@ im.plotRGB(AGO_2022, r = 3, g = 2, b = 1, title = "Plume sedimento Agosto 2022")
 plot(final_2022, add = T, alpha = 1)
 ```
 Il risultato per tutti i casi studio è il seguente:
-<img width="2000" height="2000" alt="Multiframe_Plume" src="https://github.com/user-attachments/assets/6de68eed-4e9b-4dad-bb56-e7e6d74e74d6" />
+<img width="3000" height="3000" alt="Plume_multiframe" src="https://github.com/user-attachments/assets/052816a0-181a-4e88-aa68-53dc7ee31546" />
+*Figura 4 - Immagini satellitari con in evidenza i plume ottenuti dal prodotto NDTI x NDWI.*
+
+Per andare ad osservare come varia la torbidità è stata effetturata una classificazione dei pixel ottenuti dal calcolo del NDTI. Questa operazione ha lo scopo di ottenere una valutazione dei pixel in 4 classi di torbidità (bassa, medio-bassa, medio-alta e alta) in percentuale.
+
+``` r
+# Torbidità:
+# Classifico i pixel in 4 gruppi
+NDTI_2022c = im.classify(NDTI_2022, num_clusters = 4)
+
+# rinomino le classi ottenute
+NDTI_2022c = subst(NDTI_2022c, c(1,2,3,4), c("1_bassa", "2_medio-bassa", "3_medio-alta", "4_alta"))
+
+# calcolo le percentuali
+perc_2022 = freq(NDTI_2022c)$count*100/ncell(NDTI_2022c)
+
+# Dataframe
+classi = c("bassa", "medio-bassa", "medio-alta", "alta")
+tabella = data.frame(
+  classe = classi,
+  perc_2022 = perc_2022,
+  perc_A2025 = perc_A2025,
+  perc_2023 = perc_2023,
+  perc_N2025 = perc_N2025
+)
+
+tabella$classe <- factor(
+  tabella$classe,
+  levels = c("bassa", "medio-bassa", "medio-alta", "alta")
+)
+
+# Grafico
+g1 = ggplot(tabella, aes(x = classe, y = perc_2022, fill = classe)) +
+  geom_bar(stat = "identity") +
+  ggtitle("Torbidità Agosto 2022") +
+  ylab("Percentuale (%)") +
+  ylim(0, 50) +
+  theme(legend.position="none")
+```
+<img width="2000" height="2000" alt="Grafici_Torbidità" src="https://github.com/user-attachments/assets/0af3d22f-a1bb-4616-85e5-10afd44fd278" />
+*Figura 5 - Istogrammi delle classi di torbidità ottenute dalla classificazione dell'indice NDTI*
+
+Infine, per andare ad osservare come cambia la torbidità in base alla stagionalità, è stata effettuata una analisi multitemporale tra inverno ed estate 2025:
+``` r
+# ANALISI MULTIVARIATA INVERNO - ESTATE 2025
+# differenza NDTI 
+diff_2025 = NDTI_N2025 - NDTI_A2025
+more_winter = diff_2025 > 0
+# I valori positivi indicano una maggiore torbidità in inverno
+
+# Esporto le immagini
+png("Differenza_NDTI_2025.png", width = 2000, height = 500, res = 300)
+par(oma = c(0,0,3,0))          # Aggiunge spazio sopra
+im.multiframe(1, 2)
+plot(diff_2025, col = plasma(100))
+plot(more_winter, col = plasma(100))
+mtext("Differenza NDTI inverno - estate 2025", 
+      side = 3,                 # Mette il titolo sopra
+      outer = TRUE,             # Nello spazio esterno
+      cex = 1.5                 # Dimensione testo
+)
+dev.off()
+```
+<img width="2000" height="500" alt="Differenza_NDTI_2025" src="https://github.com/user-attachments/assets/188ac757-934f-4003-b8c4-6ee04ee9fb03" />
+*Figura 6 - Analisi multitemporale rapresentante la differenza di torbidità tra inverno ed estate 2025*
+
+## 5 - Conclusioni
+In conclusione possiamo affermare che 
+
+## 6 - Bibliografia
