@@ -215,7 +215,7 @@ mtext("Differenza NDTI inverno - estate 2025",
 dev.off()
 ```
 <img width="2000" height="1000" alt="Differenza_NDTI_2025" src="https://github.com/user-attachments/assets/bb9f9918-d65f-4ce8-9b23-f456bc0c5ba1" />
-*Figura 6 - Analisi multitemporale rapresentante la differenza di torbidità tra inverno ed estate 2025*
+**Figura 6 - Analisi multitemporale rapresentante la differenza di torbidità tra inverno ed estate 2025 **
 
 ## 5 - Conclusioni
 In conclusione possiamo affermare che l'analisi condotto ha permesso di evidenziare la dinamica spaziale e temporale del plume di sedimenti del Po attraverso l'ultilizzo di immagini Sentinel-2 ed indici spettrali.
