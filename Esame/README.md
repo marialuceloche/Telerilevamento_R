@@ -218,6 +218,19 @@ dev.off()
 *Figura 6 - Analisi multitemporale rapresentante la differenza di torbidità tra inverno ed estate 2025*
 
 ## 5 - Conclusioni
-In conclusione possiamo affermare che 
+In conclusione possiamo affermare che l'analisi condotto ha permesso di evidenziare la dinamica spaziale e temporale del plume di sedimenti del Po attraverso l'ultilizzo di immagini Sentinel-2 ed indici spettrali.
+
+Le mappe di torbidità ottenute mostrano come la distribuzione della trobidità sia fortemente variabile nel tempo e nello spazio, con una maggiore concentrazione lungo la fascia costiera.
+Durante i periodi di maggiore piovosità i plume tendono ad essere molto sviluppati a causa della elevata portata fluvile che si riflette in un incremento delle classi di torbidità medio-alta.
+Al contrario, per periodi estivi di bassa portata, la distribuzione delle torbidità risulta più eterogenea e maggiormente concentrata nelle classi medio-basse lungo costa.
+
+>NOTA:
+> Aggiungere indicazioni sul meteo durante quei periodi avrebbe permesso di ottenere una valutazione migliore della correlazione diretta tra meteo e sedimento in sospensione.
+>
+
+L'analisi differenziale dell'indice NDTI tra inverno ed estate ha permesse di osservare le aree maggiormente influenzate dalle variazioni stagionali: si nota un netto incremento della torbidità alla foce del canali distributori del Po durante i mesi invernali.
 
 ## 6 - Bibliografia
+- [Manzo, Ciro, et al. "Spatio-temporal analysis of prodelta dynamics by means of new satellite generation: the case of Po river by Landsat-8 data." International journal of applied earth observation and geoinformation 66 (2018): 210-225.](https://www.sciencedirect.com/science/article/pii/S0303243417302714)
+- [Visualising coastal turbidity with Sentinel-2](https://knowledge.dea.ga.gov.au/notebooks/Real_world_examples/Turbidity_animated_timeseries/)
+- [River Turbidity Estimation using Sentinel-2 data](https://developers.arcgis.com/python/latest/samples/river-turbidity-estimation-using-sentinel2-data-/)
