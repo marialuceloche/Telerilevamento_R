@@ -9,4 +9,4 @@ This repo is related to the course on remote sensing in R at UNIBO
 ## Tutor
 + [Rocio Beatriz Cortes Lobos](https://www.unibo.it/sitoweb/rocio.corteslobos2) - rocio.corteslobos2@unibo.it
 
-> The exam ill be base on GitHub
+> The exam will be base on GitHub
