@@ -59,6 +59,11 @@ AGO_2022 = crop(c(B2_AGO_2022, B3_AGO_2022, B4_AGO_2022, B8_AGO_2022), area)
 # Rinomino gli elementi
 names(AGO_2022) = c("B2", "B3", "B4", "B8")
 ```
+>[!NOTA]
+> Da qui in avanti il codice mostrato farà riferimento solo ad uno dei casi osservati (Agosto 2022). 
+> Per leggere il codice completo fare riferimento allo scrip di R:
+>
+
 Per visualizzare le immagini è stato usato il comando *im.plotRGB* andando a specificare le bande per ottenere una visualizzazione in colori naturali (spettro del visibile). Le immagini sono state poi espostate in un multiframe ottenendo l'immagine seguente:
 ``` r
 # =============================================
@@ -87,5 +92,36 @@ dev.off()
 <img width="2000" height="2000" alt="Multiframe_FalsiColori" src="https://github.com/user-attachments/assets/c6b8a7d8-e1d5-462a-9d61-c593560984e0" />
 
 Figura 2 - Multiframe a falsi colori (NIR al posto della banda 2 del blu) per far risaltare il plume di sedimento alla foce del Po.
+
+>[!NOTA]
+>Tutte le immagini sono state esportate usando la funzione *png()* e *dev.off()*
+>
+
+**4. Mappatura dei plume
+Per andare ad estrapolare il plume dalle immagini satellitari sono stai usati due indici principali:
+
+*** NDWI (Normalized Difference Water Index)
+Questo indice permette di evidenziare e mappare la presenza di acqua libera, sfruttando le bande del verde e del NIR, minimizzado la presenza di suolo e vegetazione. L'NDWI è stato usato per separare la terraferma dal'acqua in modo da riuscire a mappare solo i sedimenti del plume e non quelli terrestri.
+
+Calcolo NDWI e maschera per l'acqua:
+``` r
+# NDWI = (verde - NIR)/(verde + NIR) --> per l'acqua
+####### Agosto 2022
+NDWI_2022 = (AGO_2022$B3 - AGO_2022$B8) / (AGO_2022$B3 + AGO_2022$B8)      # Calcolo NDWI
+acqua_2022 = NDWI_2022 > 0                                                 # Considero solo l'acqua
+AGO_2022_acqua = mask(AGO_2022, acqua_2022, maskvalue = T, inverse = T)    # Taglio l'immagine
+im.plotRGB(AGO_2022_acqua, r = 3, g = 2, b = 1)                            # Visualizzo l'acqua
+```
+
+*** NDTI (Normalized Difference Turbidity Index)
+Il NDTI permette di valutare la qualità dell'acqua e la sua torbidità in funzione dei sedimenti sospesi in essa sfruttando le bande del rosso e del verde. L'acqua limpida tenderà a riflette maggiormento il verde rispetto a quella torbida.
+
+Calcolo NDTI
+``` r
+# NDTI = (rosso - verde)/(rosso + verde) --> per la torbidità
+NDTI_2022 = (AGO_2022_acqua$B4 - AGO_2022_acqua$B3) / (AGO_2022_acqua$B4 + AGO_2022_acqua$B3)
+plot(NDTI_2022)
+
+```
 
 
