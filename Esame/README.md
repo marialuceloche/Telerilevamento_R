@@ -59,10 +59,11 @@ AGO_2022 = crop(c(B2_AGO_2022, B3_AGO_2022, B4_AGO_2022, B8_AGO_2022), area)
 # Rinomino gli elementi
 names(AGO_2022) = c("B2", "B3", "B4", "B8")
 ```
->[!NOTA]
+
+> NOTA:
 > Da qui in avanti il codice mostrato farà riferimento solo ad uno dei casi osservati (Agosto 2022). 
 > Per leggere il codice completo fare riferimento allo scrip di R:
->
+
 
 Per visualizzare le immagini è stato usato il comando *im.plotRGB* andando a specificare le bande per ottenere una visualizzazione in colori naturali (spettro del visibile). Le immagini sono state poi espostate in un multiframe ottenendo l'immagine seguente:
 ``` r
@@ -93,7 +94,7 @@ dev.off()
 
 Figura 2 - Multiframe a falsi colori (NIR al posto della banda 2 del blu) per far risaltare il plume di sedimento alla foce del Po.
 
->[!NOTA]
+>NOTA:
 >Tutte le immagini sono state esportate usando la funzione *png()* e *dev.off()*
 >
 
@@ -114,14 +115,39 @@ im.plotRGB(AGO_2022_acqua, r = 3, g = 2, b = 1)                            # Vis
 ```
 
 *** NDTI (Normalized Difference Turbidity Index)
-Il NDTI permette di valutare la qualità dell'acqua e la sua torbidità in funzione dei sedimenti sospesi in essa sfruttando le bande del rosso e del verde. L'acqua limpida tenderà a riflette maggiormento il verde rispetto a quella torbida.
+L'indice NDTI permette di valutare la qualità dell'acqua e la sua torbidità in funzione dei sedimenti sospesi in essa sfruttando le bande del rosso e del verde. L'acqua limpida tenderà a riflette maggiormento il verde rispetto a quella torbida.
 
 Calcolo NDTI
 ``` r
 # NDTI = (rosso - verde)/(rosso + verde) --> per la torbidità
 NDTI_2022 = (AGO_2022_acqua$B4 - AGO_2022_acqua$B3) / (AGO_2022_acqua$B4 + AGO_2022_acqua$B3)
 plot(NDTI_2022)
-
 ```
+Ottenuti i due indici è stata sfriuttata la loro combinazione per mettere in risalto la torbidà ed avere una indicazione qualitativa sulla qualità dell'acqua: acque ricche di sedimenti mostreranno valori più elevati rispetto a quelle limpide (valori tendendi a 0).
 
+Per andare ad isolare il sedimento nell'oggetto *plume_2022* è stato impostato un livello soglia scelto in base al risultato di *plot(sed_2022)*: questo valore cambia da caso a caso.
+``` r
+# NDTI * NDWI
+sed_2022 = (NDTI_2022 * NDWI_2022)
+plot(sed_2022)
+plume_2022 = sed_2022 < -0.1        
+plot(plume_2022)
+final_2022 = mask(sed_2022, plume_2022, maskvalue = T, inverse =T)
+plot(final_2022)
 
+## Confronto immagine true colours con il plume di sedimento ottenuto
+im.multiframe(1, 2)
+im.plotRGB(AGO_2022, r = 3, g = 2, b = 1)
+plot(final_2022)
+dev.off()
+```
+<img width="2000" height="2000" alt="Confronto_2022" src="https://github.com/user-attachments/assets/235ffbe7-d759-45b5-93fa-08a095494c43" />
+
+Per mettere in evidenza i sedimenti dei 4 casi, sono stati aggiunti con la funzione *add = T* i plume alle immagini satellitari nella seguente maniera.
+``` r
+# Immagine satellitare con il plume messo in evidenza
+im.plotRGB(AGO_2022, r = 3, g = 2, b = 1, title = "Plume sedimento Agosto 2022")
+plot(final_2022, add = T, alpha = 1)
+```
+Il risultato per tutti i casi studio è il seguente:
+<img width="2000" height="2000" alt="Multiframe_Plume" src="https://github.com/user-attachments/assets/6de68eed-4e9b-4dad-bb56-e7e6d74e74d6" />
