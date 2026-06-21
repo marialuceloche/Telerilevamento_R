@@ -79,7 +79,8 @@ dev.off()
 # =============================================
 ```
 <img width="2000" height="2000" alt="Multiframe_ColoriNaturali" src="https://github.com/user-attachments/assets/07e6539a-c982-4611-9a64-0bd98ecde2a2" />
-_Figura 1 - Multiframe a colori naturali del Delta del Po per i 4 casi presi in considerazione._
+_*Figura 1 - Multiframe a colori naturali del Delta del Po per i 4 casi presi in considerazione._*
+
 
 Per andare ad osservare meglio il contrasto tra acqua e sedimento sono state poi create le immagini a falsi colori andando a sostituire il NIR al blu. Questa operazione permette di visualizzare l'acqua limpida con un colore scuro mentre il sedimento con colori brillanti:
 ``` r
