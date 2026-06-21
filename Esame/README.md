@@ -214,7 +214,7 @@ mtext("Differenza NDTI inverno - estate 2025",
 )
 dev.off()
 ```
-<img width="2000" height="500" alt="Differenza_NDTI_2025" src="https://github.com/user-attachments/assets/188ac757-934f-4003-b8c4-6ee04ee9fb03" />
+<img width="2000" height="500" alt="Differenza_NDTI_2025" src="https://github.com/user-attachments/assets/fe1958ea-07dc-4614-96e7-32f5bb697145" />
 *Figura 6 - Analisi multitemporale rapresentante la differenza di torbidità tra inverno ed estate 2025*
 
 ## 5 - Conclusioni
