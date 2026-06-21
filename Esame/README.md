@@ -60,7 +60,7 @@ AGO_2022 = crop(c(B2_AGO_2022, B3_AGO_2022, B4_AGO_2022, B8_AGO_2022), area)
 names(AGO_2022) = c("B2", "B3", "B4", "B8")
 ```
 
-> [!IMPORTANT]:
+> [!NOTE]
 > Da qui in avanti il codice mostrato farà riferimento solo ad uno dei casi osservati (Agosto 2022). 
 > Per leggere il codice completo fare riferimento allo scrip di R:
 
@@ -79,7 +79,7 @@ dev.off()
 # =============================================
 ```
 <img width="2000" height="2000" alt="Multiframe_ColoriNaturali" src="https://github.com/user-attachments/assets/07e6539a-c982-4611-9a64-0bd98ecde2a2" />
-_*Figura 1 - Multiframe a colori naturali del Delta del Po per i 4 casi presi in considerazione._*
+_Figura 1 - Multiframe a colori naturali del Delta del Po per i 4 casi presi in considerazione._
 
 
 Per andare ad osservare meglio il contrasto tra acqua e sedimento sono state poi create le immagini a falsi colori andando a sostituire il NIR al blu. Questa operazione permette di visualizzare l'acqua limpida con un colore scuro mentre il sedimento con colori brillanti:
@@ -92,7 +92,6 @@ im.plotRGB(NOV_2025, r = 3, g = 2, b = 4, title = "Novembre 2025")
 dev.off()
 ```
 <img width="2000" height="2000" alt="Multiframe_FalsiColori" src="https://github.com/user-attachments/assets/c6b8a7d8-e1d5-462a-9d61-c593560984e0" />
-
 _Figura 2 - Multiframe a falsi colori (NIR al posto della banda 2 del blu) per far risaltare il plume di sedimento alla foce del Po._
 
 > [!NOTE]
