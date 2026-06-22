@@ -197,6 +197,10 @@ g1 = ggplot(tabella, aes(x = classe, y = perc_2022, fill = classe)) +
 <img width="2000" height="2000" alt="Grafici_Torbidità" src="https://github.com/user-attachments/assets/0af3d22f-a1bb-4616-85e5-10afd44fd278" />
 _Figura 6 - Istogrammi delle classi di torbidità ottenute dalla classificazione dell'indice NDTI._
 
+Possiamo osservare come nei periodi estivi prevalgano, tendenzialmente, le classi di torbidità medio-bassa e bassa, specialmente per l'agosto 2025, mentre per il 2022 abbiamo una maggiore componente medio-alta concentrata principalmente vicino agli emissari del Po.
+Per il caso invernale del Novembre 2025 abbiamo una buona distinzione tra torbidità bassa e alta in quanto il plume tende ad essere più esteso verso mare.
+Il caso rigurdante l'alluvione del maggio 2023 è quello che mostra una maggiore omogeneità delle classi, con una leggera prevalenza per l'alta torbità: il grande apporto di sedimento a seguito delle forti piogge ha determinato una maggiore espansione del plume e una buona suddivisione della torbidità a mare.
+
 Infine, per andare ad osservare come cambia la torbidità in base alla stagionalità, è stata effettuata una analisi multitemporale tra inverno ed estate 2025:
 ``` r
 # ANALISI MULTIVARIATA INVERNO - ESTATE 2025
