@@ -19,7 +19,7 @@ Il fiume controlla quindi l'apporto sedimentario mentre la corrente lungo costa 
 
 <img width="1247" height="915" alt="Po" src="https://github.com/user-attachments/assets/88cbf6d5-dbb4-4120-8154-10d2e9e0e5c1" />
 *Figura 1 - Zoom sulla terminazione del fiume Po alla scala regionale.*
-
+<br/><br/>
 
 La torbidità dell'acqua è legata alla concentrazione di sedimenti in sospensione, fortemente influenzata dalle condizioni metereologiche e idrologiche: periodi con precipitazioni intense o ricorrenti determinano una maggiore erosione del bacino e quindi un maggiore apporto a mare creando una maggiore torbidità, viceversa in periodi di secca o con scarse precipitazioni osserveremo un'acqua più pulita.
 
@@ -84,8 +84,7 @@ dev.off()
 ```
 <img width="2000" height="2000" alt="Multiframe_ColoriNaturali" src="https://github.com/user-attachments/assets/07e6539a-c982-4611-9a64-0bd98ecde2a2" />
 *Figura 2 - Multiframe a colori naturali del Delta del Po per i 4 casi presi in considerazione.*
-
-
+<br/><br/>
 Per andare ad osservare meglio il contrasto tra acqua e sedimento sono state poi create le immagini a falsi colori andando a sostituire il NIR al blu. Questa operazione permette di visualizzare l'acqua limpida con un colore scuro mentre il sedimento con colori brillanti:
 ``` r
 im.multiframe(2, 2) # multiframe con 2 righe e 2 colonne
