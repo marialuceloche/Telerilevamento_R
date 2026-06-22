@@ -107,7 +107,7 @@ dev.off()
 <br/><br/>
 
 ## 4 - Mappatura dei plume
-Per andare ad estrapolare il plume dalle immagini satellitari sono stai usati due indici principali:
+Per andare ad estrapolare il plume dalle immagini satellitari sono stati usati due indici principali:
 
 ### NDWI (Normalized Difference Water Index)
 Questo indice permette di evidenziare e mappare la presenza di acqua libera, sfruttando le bande del verde e del NIR, minimizzado la presenza di suolo e vegetazione. L'NDWI è stato usato per separare la terraferma dal'acqua in modo da riuscire a mappare solo i sedimenti del plume e non quelli terrestri.
@@ -244,7 +244,7 @@ Al contrario, per periodi estivi di bassa portata, la distribuzione delle torbid
 > Aggiungere indicazioni sul meteo durante quei periodi avrebbe permesso di ottenere una valutazione migliore della correlazione diretta tra meteo e sedimento in sospensione.
 >
 
-L'analisi differenziale dell'indice NDTI tra inverno ed estate ha permesse di osservare le aree maggiormente influenzate dalle variazioni stagionali: si nota un netto incremento della torbidità alla foce del canali distributori del Po durante i mesi invernali.
+L'analisi differenziale dell'indice NDTI tra inverno ed estate ha permesso di osservare le aree maggiormente influenzate dalle variazioni stagionali: si nota un netto incremento della torbidità alla foce del canali distributori del Po durante i mesi invernali.
 
 ## 6 - Bibliografia
 - [Manzo, Ciro, et al. "Spatio-temporal analysis of prodelta dynamics by means of new satellite generation: the case of Po river by Landsat-8 data." International journal of applied earth observation and geoinformation 66 (2018): 210-225.](https://www.sciencedirect.com/science/article/pii/S0303243417302714)
