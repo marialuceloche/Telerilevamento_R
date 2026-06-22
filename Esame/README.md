@@ -99,9 +99,11 @@ dev.off()
 <img width="2000" height="2000" alt="Multiframe_FalsiColori" src="https://github.com/user-attachments/assets/c6b8a7d8-e1d5-462a-9d61-c593560984e0" />
 *Figura 3 - Multiframe a falsi colori (NIR al posto della banda 2 del blu) per far risaltare il plume di sedimento alla foce del Po.*
 <br/><br/>
+
 > [!NOTE]
-> Tutte le immagini sono state esportate usando la funzione *png()* e *dev.off()*
+> Tutte le immagini sono state esportate usando la funzione _png()_ e _dev.off()_
 >
+
 <br/><br/>
 
 ## 4 - Mappatura dei plume
