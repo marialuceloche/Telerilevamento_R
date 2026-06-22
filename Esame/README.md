@@ -84,7 +84,9 @@ dev.off()
 ```
 <img width="2000" height="2000" alt="Multiframe_ColoriNaturali" src="https://github.com/user-attachments/assets/07e6539a-c982-4611-9a64-0bd98ecde2a2" />
 *Figura 2 - Multiframe a colori naturali del Delta del Po per i 4 casi presi in considerazione.*
+
 <br/><br/>
+
 Per andare ad osservare meglio il contrasto tra acqua e sedimento sono state poi create le immagini a falsi colori andando a sostituire il NIR al blu. Questa operazione permette di visualizzare l'acqua limpida con un colore scuro mentre il sedimento con colori brillanti:
 ``` r
 im.multiframe(2, 2) # multiframe con 2 righe e 2 colonne
@@ -96,12 +98,13 @@ dev.off()
 ```
 <img width="2000" height="2000" alt="Multiframe_FalsiColori" src="https://github.com/user-attachments/assets/c6b8a7d8-e1d5-462a-9d61-c593560984e0" />
 *Figura 3 - Multiframe a falsi colori (NIR al posto della banda 2 del blu) per far risaltare il plume di sedimento alla foce del Po.*
-
+<br/><br/>
 > [!NOTE]
 > Tutte le immagini sono state esportate usando la funzione *png()* e *dev.off()*
 >
+<br/><br/>
 
-**4 - Mappatura dei plume
+** 4 - Mappatura dei plume
 Per andare ad estrapolare il plume dalle immagini satellitari sono stai usati due indici principali:
 
 *** NDWI (Normalized Difference Water Index)
@@ -146,6 +149,7 @@ dev.off()
 ```
 <img width="2000" height="1000" alt="Confronto_2022" src="https://github.com/user-attachments/assets/83d15147-f5a1-4f83-8667-5abd648e7eae" />
 *Figura 4 - Confronto tra l'immagine satellitare e il plume ottenuto attraverso il prodotto NDTI x NDWI*
+<br/><br/>
 
 Per mettere in evidenza i sedimenti dei 4 casi, sono stati aggiunti con la funzione *add = T* i plume alle immagini satellitari nella seguente maniera.
 ``` r
@@ -195,9 +199,12 @@ g1 = ggplot(tabella, aes(x = classe, y = perc_2022, fill = classe)) +
 ```
 <img width="2000" height="2000" alt="Grafici_Torbidità" src="https://github.com/user-attachments/assets/0af3d22f-a1bb-4616-85e5-10afd44fd278" />
 *Figura 6 - Istogrammi delle classi di torbidità ottenute dalla classificazione dell'indice NDTI.*
+<br/><br/>
 
 Possiamo osservare come nei periodi estivi prevalgano, tendenzialmente, le classi di torbidità medio-bassa e bassa, specialmente per l'agosto 2025, mentre per il 2022 abbiamo una maggiore componente medio-alta concentrata principalmente vicino agli emissari del Po.
+<br/><br/>
 Per il caso invernale del Novembre 2025 abbiamo una buona distinzione tra torbidità bassa e alta in quanto il plume tende ad essere più esteso verso mare.
+<br/><br/>
 Il caso rigurdante l'alluvione del maggio 2023 è quello che mostra una maggiore omogeneità delle classi, con una leggera prevalenza per l'alta torbità: il grande apporto di sedimento a seguito delle forti piogge ha determinato una maggiore espansione del plume e una buona suddivisione della torbidità a mare.
 
 Infine, per andare ad osservare come cambia la torbidità in base alla stagionalità, è stata effettuata una analisi multitemporale tra inverno ed estate 2025:
