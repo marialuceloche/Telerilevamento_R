@@ -104,10 +104,10 @@ dev.off()
 >
 <br/><br/>
 
-** 4 - Mappatura dei plume
+## 4 - Mappatura dei plume
 Per andare ad estrapolare il plume dalle immagini satellitari sono stai usati due indici principali:
 
-*** NDWI (Normalized Difference Water Index)
+### NDWI (Normalized Difference Water Index)
 Questo indice permette di evidenziare e mappare la presenza di acqua libera, sfruttando le bande del verde e del NIR, minimizzado la presenza di suolo e vegetazione. L'NDWI è stato usato per separare la terraferma dal'acqua in modo da riuscire a mappare solo i sedimenti del plume e non quelli terrestri.
 
 Calcolo NDWI e maschera per l'acqua:
@@ -120,7 +120,7 @@ AGO_2022_acqua = mask(AGO_2022, acqua_2022, maskvalue = T, inverse = T)    # Tag
 im.plotRGB(AGO_2022_acqua, r = 3, g = 2, b = 1)                            # Visualizzo l'acqua
 ```
 
-*** NDTI (Normalized Difference Turbidity Index)
+### NDTI (Normalized Difference Turbidity Index)
 L'indice NDTI permette di valutare la qualità dell'acqua e la sua torbidità in funzione dei sedimenti sospesi in essa sfruttando le bande del rosso e del verde. L'acqua limpida tenderà a riflette maggiormento il verde rispetto a quella torbida.
 
 Calcolo NDTI
