@@ -337,10 +337,6 @@ g4 = ggplot(tabella, aes(x = classe, y = perc_N2025, fill = classe)) +
   theme(legend.position="none")
 
 g1 + g2 + g3 + g4
-# g1 = prevalgono le classi media e alta di torbidità concentrata vicino agli emissari del Po 
-# g2 = poco sedimento in generale sparso omogeneamente lungo il delta--> prevale l'acqua limpida
-# g3 = aumento netto delle classi medio-alte a causa del grande apporto di sedimento a seguito delle forti piogge --> si spinge più a mare
-# g4 = torbidità bassa e media caratterizzata da una grande dispersione dei sedimenti lungo costa
 
 png("Grafici_Torbidità.png", width = 2000, height = 2000, res = 300)
 g1 + g2 + g3 + g4
