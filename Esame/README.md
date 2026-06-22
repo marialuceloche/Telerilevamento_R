@@ -14,7 +14,7 @@
 ## 1 - Inquadramento 
 Il delta del Po è situato nell’Italia nord‑orientale, lungo la costa dell’Adriatico settentrionale, tra le regioni Veneto ed Emilia‑Romagna.
 L’area deltizia si estende per circa 200–300 km² con una morfologia complessa e articolata in diversi rami distributari (tra cui il Po di Goro e il Po di Pila), che convogliano acqua e sedimenti verso il mare.
-Dal punto di vista geomorfologico, il delta del Po è un delta fluvio-influenzato a seguito del taglio di Portoviro avveuto  circa 350 anni fa. 
+Dal punto di vista geomorfologico, il delta del Po è un delta fluvio-influenzato, specialmente a seguito del taglio di Porto Viro, avveuto circa 350 anni fa. 
 Il fiume controlla quindi l'apporto sedimentario mentre la corrente lungo costa regola la dispersione e ridistribuzione del sedimento nell'Adriatico.
 
 <img width="1247" height="915" alt="Po" src="https://github.com/user-attachments/assets/88cbf6d5-dbb4-4120-8154-10d2e9e0e5c1" />
