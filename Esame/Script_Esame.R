@@ -343,7 +343,7 @@ g1 + g2 + g3 + g4
 dev.off()
 
 
-# ANALISI MULTIVARIATA ESTATE - INVERNO 2025
+# ANALISI MULTITEMPORALE ESTATE - INVERNO 2025
 # valori positivi → più torbidità in inverno
 # valori negativi → più torbidità in estate
 # differenza NDTI 
