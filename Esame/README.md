@@ -186,7 +186,7 @@ tabella = data.frame(
   perc_N2025 = perc_N2025
 )
 
-tabella$classe <- factor(
+tabella$classe = factor(
   tabella$classe,
   levels = c("bassa", "medio-bassa", "medio-alta", "alta")
 )
