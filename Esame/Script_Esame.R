@@ -310,13 +310,13 @@ NDTI_N2025c = riordina_classi(final_N2025, NDTI_N2025c_raw)
 zonal(final_N2025, NDTI_N2025c_raw, fun = "mean")
 
 # Esporto i plume classificati
-png("Plume_classificazione.png", width = 3000, height = 3000, res = 300)
+png("Plume_classificazione.png", width = 5000, height = 5000, res = 300)
 # layout 2 righe x 2 colonne
-par(mfrow = c(2,2), mar=c(2,2,5,2))
-plot(NDTI_2022c)
-plot(NDTI_A2025c)
-plot(NDTI_2023c)
-plot(NDTI_N2025c)
+par(mfrow = c(2,2), mar=c(0,0,3,0))
+plot(NDTI_2022c, main = " Agosto 2022")
+plot(NDTI_A2025c, main = " Agosto 2025")
+plot(NDTI_2023c, main = " Maggio 2023")
+plot(NDTI_N2025c, main = " Novembre 2025")
 dev.off()
 
 
