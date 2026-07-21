@@ -285,13 +285,13 @@ NDTI_N2025c = im.classify(final_N2025, num_clusters = 4)
 ##### rinomino le classi ottenute
 # creo una funzione che permette di mettere in ordine le 4 classi di ogni immagine in funzione della media (dal valore più basso a quello più alto)
 riordina_classi = function(raster_ndti, raster_classificato) {
-  medie = zonal(raster_ndti, raster_classificato, fun = "mean")
-  ordine = medie[order(medie[[2]]), 1]  # cluster ID ordinati dal NDTI più basso al più alto
-  subst(raster_classificato, ordine, c("1_bassa", "2_medio-bassa", "3_medio-alta", "4_alta"))
+  medie = zonal(raster_ndti, raster_classificato, fun = "mean") # calcola il valore medio di NDTI per ogni cluster
+  ordine = medie[order(medie[[2]]), 1]  # ordina i cluster dal valore medio più basso al più alto
+  subst(raster_classificato, ordine, c("1_bassa", "2_medio-bassa", "3_medio-alta", "4_alta")) # rinomina i cluster alla categoria di torbidità corrispondente
 }
 # 2022
 NDTI_2022c_raw = im.classify(final_2022, num_clusters = 4)
-NDTI_2022c = riordina_classi(final_2022, NDTI_2022c_raw)
+NDTI_2022c = riordina_classi(final_2022, NDTI_2022c_raw) # uso la funzione di prima per mettere le classi nell'ordine corretto
 zonal(final_2022, NDTI_2022c_raw, fun = "mean") # controllo l'ordine dei valori ottenuti per definire l'ordine delle classi
 
 # A2025
@@ -322,11 +322,11 @@ dev.off()
 
 ##### calcolo le percentuali in funzione dell'area del plume
 # 2022
-area_2022 = global(cellSize(final_2022, unit = "km"), "sum", na.rm = T)
-pixel_2022 = cellSize(NDTI_2022c, unit = "km")
-classi_2022 = zonal(pixel_2022, NDTI_2022c, fun = "sum", na.rn = T)
+area_2022 = global(cellSize(final_2022, unit = "km"), "sum", na.rm = T) # calcolo superficie totale del plume (fa la somma dei valori di ogni pixel del plume a cui è stato detto di contenere la sua area)
+pixel_2022 = cellSize(NDTI_2022c, unit = "km") # mappa delle aree dei pixel
+classi_2022 = zonal(pixel_2022, NDTI_2022c, fun = "sum", na.rn = T) # area delle classi (somma tutte le aree dei pixel appartenenti ad ogni classe)
 classi_2022
-perc_2022 = classi_2022$area * 100 / sum(classi_2022$area)
+perc_2022 = classi_2022$area * 100 / sum(classi_2022$area) # percentuale dell'area delle classi sull'area totale del plume
 
 # A2025
 area_A2025 = global(cellSize(final_A2025, unit = "km"), "sum", na.rm = T)
