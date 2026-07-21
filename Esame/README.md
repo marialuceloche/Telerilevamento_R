@@ -204,7 +204,7 @@ g1 = ggplot(classi_2022, aes(x=value, y=area, fill=value)) +
 *Figura 6A - Risultato della classificazione della torbidità da bassa ad alta.*
 <br/><br/>
 
-<img width="2000" height="2000" alt="Grafici_Torbidità" src="https://github.com/user-attachments/assets/174b37b5-ec91-417f-a8ca-aa7a707b07ce" />
+<img width="3000" height="2000" alt="Grafici_Torbidità" src="https://github.com/user-attachments/assets/f0e101f5-9f3e-4e2e-a870-c6d269245222" />
 *Figura 6B - Istogrammi delle classi di torbidità in km^2 ottenute dalla classificazione dell'indice NDTI.*
 <br/><br/>
 
