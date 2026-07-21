@@ -167,51 +167,54 @@ Per andare ad osservare come varia la torbidità è stata effetturata una classi
 
 ``` r
 # Torbidità:
-# Classifico i pixel in 4 gruppi
-NDTI_2022c = im.classify(NDTI_2022, num_clusters = 4)
+##### Classifico i pixel in 4 gruppi
+NDTI_2022c = im.classify(final_2022, num_clusters = 4)
 
-# rinomino le classi ottenute
-NDTI_2022c = subst(NDTI_2022c, c(1,2,3,4), c("1_bassa", "2_medio-bassa", "3_medio-alta", "4_alta"))
+##### rinomino le classi ottenute
+# creo una funzione che permette di mettere in ordine le 4 classi di ogni immagine in funzione della media (dal valore più basso a quello più alto)
+riordina_classi = function(raster_ndti, raster_classificato) {
+  medie = zonal(raster_ndti, raster_classificato, fun = "mean")
+  ordine = medie[order(medie[[2]]), 1]  # cluster ID ordinati dal NDTI più basso al più alto
+  subst(raster_classificato, ordine, c("1_bassa", "2_medio-bassa", "3_medio-alta", "4_alta"))
+}
+# 2022
+NDTI_2022c_raw = im.classify(final_2022, num_clusters = 4)
+NDTI_2022c = riordina_classi(final_2022, NDTI_2022c_raw)
+zonal(final_2022, NDTI_2022c_raw, fun = "mean") # controllo l'ordine dei valori ottenuti per definire l'ordine delle classi
 
-# calcolo le percentuali
-perc_2022 = freq(NDTI_2022c)$count_100/ncell(NDTI_2022c)
+##### calcolo le percentuali in funzione dell'area del plume
+# 2022
+area_2022 = global(cellSize(final_2022, unit = "km"), "sum", na.rm = T)
+pixel_2022 = cellSize(NDTI_2022c, unit = "km")
+classi_2022 = zonal(pixel_2022, NDTI_2022c, fun = "sum", na.rn = T)
+classi_2022
+perc_2022 = classi_2022$area * 100 / sum(classi_2022$area)
 
-# Dataframe
-classi = c("bassa", "medio-bassa", "medio-alta", "alta")
-tabella = data.frame(
-  classe = classi,
-  perc_2022 = perc_2022,
-  perc_A2025 = perc_A2025,
-  perc_2023 = perc_2023,
-  perc_N2025 = perc_N2025
-)
-
-tabella$classe = factor(
-  tabella$classe,
-  levels = c("bassa", "medio-bassa", "medio-alta", "alta")
-)
-
-# Grafico
-g1 = ggplot(tabella, aes(x = classe, y = perc_2022, fill = classe)) +
-  geom_bar(stat = "identity") +
+##### Grafico
+g1 = ggplot(classi_2022, aes(x=value, y=area, fill=value)) +
+  geom_bar(stat="identity") +
+  ylim(0, 300) +
+  ylab("Area (km²)") +
+  xlab("Classi") +
   ggtitle("Torbidità Agosto 2022") +
-  ylab("Percentuale (%)") +
-  ylim(0, 50) +
   theme(legend.position="none")
+
 ```
-<img width="2000" height="2000" alt="Grafici_Torbidità" src="https://github.com/user-attachments/assets/0af3d22f-a1bb-4616-85e5-10afd44fd278" />
-*Figura 6 - Istogrammi delle classi di torbidità ottenute dalla classificazione dell'indice NDTI.*
+<img width="3000" height="3000" alt="Plume_classificazione" src="https://github.com/user-attachments/assets/07764505-dc90-4c14-af2d-0a072167f52e" />
+*Figura 6A - Risultato della classificazione della torbidità da bassa ad alta.*
+<img width="2000" height="2000" alt="Grafici_Torbidità" src="https://github.com/user-attachments/assets/174b37b5-ec91-417f-a8ca-aa7a707b07ce" />
+*Figura 6B - Istogrammi delle classi di torbidità in km^2 ottenute dalla classificazione dell'indice NDTI.*
 <br/><br/>
 
-Possiamo osservare come nei periodi estivi prevalgano, tendenzialmente, le classi di torbidità medio-bassa e bassa, specialmente per l'agosto 2025, mentre per il 2022 abbiamo una maggiore componente medio-alta concentrata principalmente vicino agli emissari del Po.
+Possiamo osservare come nei periodi estivi prevalgano, tendenzialmente, le classi di torbidità medio-alta e alta, specialmente per l'agosto 2025, che tendono a concentrarsi maggiormente lungo la costa e vicino agli emissari del Po.
 <br/><br/>
-Per il caso invernale del Novembre 2025 abbiamo una buona distinzione tra torbidità bassa e alta in quanto il plume tende ad essere più esteso verso mare.
+Per il caso rigurdante l'alluvione del maggio 2023, osserviano un netto aumento areale delle classi medio-alta e alta, che arrivano a quasi 300 km^2 ciascuna, in quanto il plume tende ad essere più intenso ed esteso verso mare.
 <br/><br/>
-Il caso rigurdante l'alluvione del maggio 2023 è quello che mostra una maggiore omogeneità delle classi, con una leggera prevalenza per l'alta torbità: il grande apporto di sedimento a seguito delle forti piogge ha determinato una maggiore espansione del plume e una buona suddivisione della torbidità a mare.
+Il caso invernale del novembre 2025 abbiamo è quello che mostra una maggiore omogeneità delle classi, con una leggera prevalenza per la medio-bassa torbidità: il grande apporto di sedimento a seguito delle forti piogge ha determinato una maggiore espansione del plume (con tutte le classi sopra i 100 km^2) e una buona suddivisione della torbidità a mare.
 
 Infine, per andare ad osservare come cambia la torbidità in base alla stagionalità, è stata effettuata una analisi multitemporale tra inverno ed estate 2025:
 ``` r
-# ANALISI MULTIVARIATA INVERNO - ESTATE 2025
+# ANALISI MULTITEMPORALE INVERNO - ESTATE 2025
 # differenza NDTI 
 diff_2025 = NDTI_N2025 - NDTI_A2025
 more_winter = diff_2025 > 0
