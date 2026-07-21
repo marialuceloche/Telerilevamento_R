@@ -275,73 +275,124 @@ dev.off()
 
 
 # Torbidità:
-# Classifico i pixel in 4 gruppi
-NDTI_2022c = im.classify(NDTI_2022, num_clusters = 4)
-NDTI_A2025c = im.classify(NDTI_A2025, num_clusters = 4)
-NDTI_2023c = im.classify(NDTI_2023, num_clusters = 4)
-NDTI_N2025c = im.classify(NDTI_N2025, num_clusters = 4)
-# rinomino le classi ottenute
-NDTI_2022c = subst(NDTI_2022c, c(1,2,3,4), c("1_bassa", "2_medio-bassa", "3_medio-alta", "4_alta"))
-NDTI_A2025c = subst(NDTI_A2025c, c(1,2,3,4), c("1_bassa", "2_medio-bassa", "3_medio-alta", "4_alta"))
-NDTI_2023c = subst(NDTI_2023c, c(1,2,3,4), c("1_bassa", "2_medio-bassa", "3_medio-alta", "4_alta"))
-NDTI_N2025c = subst(NDTI_N2025c, c(1,2,3,4), c("1_bassa", "2_medio-bassa", "3_medio-alta", "4_alta"))
-# calcolo le percentuali
-perc_2022 = freq(NDTI_2022c)$count*100/ncell(NDTI_2022c)
-perc_A2025 = freq(NDTI_A2025c)$count*100/ncell(NDTI_A2025c)
-perc_2023 = freq(NDTI_2023c)$count*100/ncell(NDTI_2023c)
-perc_N2025 = freq(NDTI_N2025c)$count*100/ncell(NDTI_N2025c)
-# Dataframe
-classi = c("bassa", "medio-bassa", "medio-alta", "alta")
-tabella = data.frame(
-  classe = classi,
-  perc_2022 = perc_2022,
-  perc_A2025 = perc_A2025,
-  perc_2023 = perc_2023,
-  perc_N2025 = perc_N2025
-)
-tabella$classe = factor(
-  tabella$classe,
-  levels = c("bassa", "medio-bassa", "medio-alta", "alta")
-)
+##### Classifico i pixel in 4 gruppi
+NDTI_2022c = im.classify(final_2022, num_clusters = 4)
+NDTI_A2025c = im.classify(final_A2025, num_clusters = 4)
+NDTI_2023c = im.classify(final_2023, num_clusters = 4)
+NDTI_N2025c = im.classify(final_N2025, num_clusters = 4)
 
 
-# Grafico
-g1 = ggplot(tabella, aes(x = classe, y = perc_2022, fill = classe)) +
-  geom_bar(stat = "identity") +
+##### rinomino le classi ottenute
+# creo una funzione che permette di mettere in ordine le 4 classi di ogni immagine in funzione della media (dal valore più basso a quello più alto)
+riordina_classi = function(raster_ndti, raster_classificato) {
+  medie = zonal(raster_ndti, raster_classificato, fun = "mean")
+  ordine = medie[order(medie[[2]]), 1]  # cluster ID ordinati dal NDTI più basso al più alto
+  subst(raster_classificato, ordine, c("1_bassa", "2_medio-bassa", "3_medio-alta", "4_alta"))
+}
+# 2022
+NDTI_2022c_raw = im.classify(final_2022, num_clusters = 4)
+NDTI_2022c = riordina_classi(final_2022, NDTI_2022c_raw)
+zonal(final_2022, NDTI_2022c_raw, fun = "mean") # controllo l'ordine dei valori ottenuti per definire l'ordine delle classi
+
+# A2025
+NDTI_A2025c_raw = im.classify(final_A2025, num_clusters = 4)
+NDTI_A2025c = riordina_classi(final_A2025, NDTI_A2025c_raw)
+zonal(final_A2025, NDTI_A2025c_raw, fun = "mean")
+
+# 2023
+NDTI_2023c_raw = im.classify(final_2023, num_clusters = 4)
+NDTI_2023c = riordina_classi(final_2023, NDTI_2023c_raw)
+zonal(final_2023, NDTI_2023c_raw, fun = "mean")
+
+# N2025
+NDTI_N2025c_raw = im.classify(final_N2025, num_clusters = 4)
+NDTI_N2025c = riordina_classi(final_N2025, NDTI_N2025c_raw)
+zonal(final_N2025, NDTI_N2025c_raw, fun = "mean")
+
+# Esporto i plume classificati
+png("Plume_classificazione.png", width = 3000, height = 3000, res = 300)
+# layout 2 righe x 2 colonne
+par(mfrow = c(2,2), mar=c(2,2,5,2))
+plot(NDTI_2022c)
+plot(NDTI_A2025c)
+plot(NDTI_2023c)
+plot(NDTI_N2025c)
+dev.off()
+
+
+##### calcolo le percentuali in funzione dell'area del plume
+# 2022
+area_2022 = global(cellSize(final_2022, unit = "km"), "sum", na.rm = T)
+pixel_2022 = cellSize(NDTI_2022c, unit = "km")
+classi_2022 = zonal(pixel_2022, NDTI_2022c, fun = "sum", na.rn = T)
+classi_2022
+perc_2022 = classi_2022$area * 100 / sum(classi_2022$area)
+
+# A2025
+area_A2025 = global(cellSize(final_A2025, unit = "km"), "sum", na.rm = T)
+pixel_A2025 = cellSize(NDTI_A2025c, unit = "km")
+classi_A2025 = zonal(pixel_A2025, NDTI_A2025c, fun = "sum", na.rn = T)
+classi_A2025
+perc_A2025 = classi_A2025$area * 100 / sum(classi_A2025$area)
+
+# 2023
+area_2023 = global(cellSize(final_2023, unit = "km"), "sum", na.rm = T)
+pixel_2023 = cellSize(NDTI_2023c, unit = "km")
+classi_2023 = zonal(pixel_2023, NDTI_2023c, fun = "sum", na.rn = T)
+classi_2023
+perc_2023 = classi_2023$area * 100 / sum(classi_2023$area)
+
+# N2025
+area_N2025 = global(cellSize(final_N2025, unit = "km"), "sum", na.rm = T)
+pixel_N2025 = cellSize(NDTI_N2025c, unit = "km")
+classi_N2025 = zonal(pixel_N2025, NDTI_N2025c, fun = "sum", na.rn = T)
+classi_N2025
+perc_N2025 = classi_N2025$area * 100 / sum(classi_N2025$area)
+
+
+##### Grafico
+g1 = ggplot(classi_2022, aes(x=value, y=area, fill=value)) +
+  geom_bar(stat="identity") +
+  ylim(0, 300) +
+  ylab("Area (km²)") +
+  xlab("Classi") +
   ggtitle("Torbidità Agosto 2022") +
-  ylab("Percentuale (%)") +
-  ylim(0, 50) +
   theme(legend.position="none")
 
 
-g2 = ggplot(tabella, aes(x = classe, y = perc_A2025, fill = classe)) +
-  geom_bar(stat = "identity") +
+g2 = ggplot(classi_A2025, aes(x=value, y=area, fill=value)) +
+  geom_bar(stat="identity") +
+  ylim(0, 300) +
+  ylab("Area (km²)") +
+  xlab("Classi") +
   ggtitle("Torbidità Agosto 2025") +
-  ylab("Percentuale (%)")+
-  ylim(0, 50) +
   theme(legend.position="none")
 
-
-g3 = ggplot(tabella, aes(x = classe, y = perc_2023, fill = classe)) +
-  geom_bar(stat = "identity") +
+g3 = ggplot(classi_2023, aes(x=value, y=area, fill=value)) +
+  geom_bar(stat="identity") +
+  ylim(0, 300) +
+  ylab("Area (km²)") +
+  xlab("Classi") +
   ggtitle("Torbidità Maggio 2023") +
-  ylab("Percentuale (%)") + 
-  ylim(0, 50) +
   theme(legend.position="none")
 
-g4 = ggplot(tabella, aes(x = classe, y = perc_N2025, fill = classe)) +
-  geom_bar(stat = "identity") +
+g4 = ggplot(classi_N2025, aes(x=value, y=area, fill=value)) +
+  geom_bar(stat="identity") +
+  ylim(0, 300) +
+  ylab("Area (km²)") +
+  xlab("Classi") +
   ggtitle("Torbidità Novembre 2025") +
-  ylab("Percentuale (%)") + 
-  ylim(0, 50) +
   theme(legend.position="none")
 
 g1 + g2 + g3 + g4
+# g1 = prevalgono le classi media e alta di torbidità concentrata vicino agli emissari del Po 
+# g2 = come g1
+# g3 = aumento netto delle classi medio-alte a causa del grande apporto di sedimento a seguito delle forti piogge --> si spinge più a mare
+# g4 = torbidità bassa e media caratterizzata da una grande dispersione dei sedimenti lungo costa
 
 png("Grafici_Torbidità.png", width = 2000, height = 2000, res = 300)
 g1 + g2 + g3 + g4
 dev.off()
-
 
 # ANALISI MULTITEMPORALE ESTATE - INVERNO 2025
 # valori positivi → più torbidità in inverno
