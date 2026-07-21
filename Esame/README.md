@@ -1,3 +1,4 @@
+<img width="5000" height="5000" alt="Plume_classificazione" src="https://github.com/user-attachments/assets/af6a1080-2dca-4140-b278-b89c9c552130" />
 #### Maria Luce Loche
 ## Progetto di Telerilevamento Geo-Ecologico in R - anno 2024/2025
 #### Laurea Magistrale in Geologia per lo sviluppo sostenibile (LM-74 R)
@@ -200,7 +201,7 @@ g1 = ggplot(classi_2022, aes(x=value, y=area, fill=value)) +
   theme(legend.position="none")
 
 ```
-<img width="3000" height="3000" alt="Plume_classificazione" src="https://github.com/user-attachments/assets/07764505-dc90-4c14-af2d-0a072167f52e" />
+<img width="5000" height="5000" alt="Plume_classificazione" src="https://github.com/user-attachments/assets/a14eb89c-5044-4440-b6dd-97ef5e9e8fde" />
 *Figura 6A - Risultato della classificazione della torbidità da bassa ad alta.*
 <img width="2000" height="2000" alt="Grafici_Torbidità" src="https://github.com/user-attachments/assets/174b37b5-ec91-417f-a8ca-aa7a707b07ce" />
 *Figura 6B - Istogrammi delle classi di torbidità in km^2 ottenute dalla classificazione dell'indice NDTI.*
