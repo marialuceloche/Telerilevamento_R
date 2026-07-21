@@ -200,7 +200,7 @@ g1 = ggplot(classi_2022, aes(x=value, y=area, fill=value)) +
   theme(legend.position="none")
 
 ```
-<img width="5000" height="5000" alt="Plume_classificazione" src="https://github.com/user-attachments/assets/a14eb89c-5044-4440-b6dd-97ef5e9e8fde" />
+<img width="5000" height="5000" alt="Plume_classificazione" src="https://github.com/user-attachments/assets/17d534b4-35ae-457c-9a7b-d4273ee0d24e" />
 *Figura 6A - Risultato della classificazione della torbidità da bassa ad alta.*
 <br/><br/>
 
