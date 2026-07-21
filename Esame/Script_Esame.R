@@ -390,7 +390,7 @@ g1 + g2 + g3 + g4
 # g3 = aumento netto delle classi medio-alte a causa del grande apporto di sedimento a seguito delle forti piogge --> si spinge più a mare
 # g4 = torbidità bassa e media caratterizzata da una grande dispersione dei sedimenti lungo costa
 
-png("Grafici_Torbidità.png", width = 3000, height = 3000, res = 300)
+png("Grafici_Torbidità.png", width = 3000, height = 2000, res = 300)
 g1 + g2 + g3 + g4
 dev.off()
 
