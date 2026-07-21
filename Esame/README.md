@@ -1,4 +1,3 @@
-<img width="5000" height="5000" alt="Plume_classificazione" src="https://github.com/user-attachments/assets/af6a1080-2dca-4140-b278-b89c9c552130" />
 #### Maria Luce Loche
 ## Progetto di Telerilevamento Geo-Ecologico in R - anno 2024/2025
 #### Laurea Magistrale in Geologia per lo sviluppo sostenibile (LM-74 R)
