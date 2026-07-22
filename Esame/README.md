@@ -186,7 +186,7 @@ zonal(final_2022, NDTI_2022c_raw, fun = "mean") # controllo l'ordine dei valori 
 # 2022
 area_2022 = global(cellSize(final_2022, unit = "km"), "sum", na.rm = T) # calcolo superficie totale del plume (somma dei valori di ogni pixel areale del plume)
 pixel_2022 = cellSize(NDTI_2022c, unit = "km") # mappa delle aree dei pixel
-classi_2022 = zonal(pixel_2022, NDTI_2022c, fun = "sum", na.rn = T) # area delle classi (somma tutte le aree dei pixel appartenenti ad ogni classe)
+classi_2022 = zonal(pixel_2022, NDTI_2022c, fun = "sum", na.rm = T) # area delle classi (somma tutte le aree dei pixel appartenenti ad ogni classe)
 classi_2022
 perc_2022 = classi_2022$area * 100 / sum(classi_2022$area) # percentuale dell'area delle classi sull'area totale del plume
 
