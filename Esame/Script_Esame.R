@@ -331,21 +331,21 @@ perc_2022 = classi_2022$area * 100 / sum(classi_2022$area) # percentuale dell'ar
 # A2025
 area_A2025 = global(cellSize(final_A2025, unit = "km"), "sum", na.rm = T)
 pixel_A2025 = cellSize(NDTI_A2025c, unit = "km")
-classi_A2025 = zonal(pixel_A2025, NDTI_A2025c, fun = "sum", na.rn = T)
+classi_A2025 = zonal(pixel_A2025, NDTI_A2025c, fun = "sum", na.rm = T)
 classi_A2025
 perc_A2025 = classi_A2025$area * 100 / sum(classi_A2025$area)
 
 # 2023
 area_2023 = global(cellSize(final_2023, unit = "km"), "sum", na.rm = T)
 pixel_2023 = cellSize(NDTI_2023c, unit = "km")
-classi_2023 = zonal(pixel_2023, NDTI_2023c, fun = "sum", na.rn = T)
+classi_2023 = zonal(pixel_2023, NDTI_2023c, fun = "sum", na.rm = T)
 classi_2023
 perc_2023 = classi_2023$area * 100 / sum(classi_2023$area)
 
 # N2025
 area_N2025 = global(cellSize(final_N2025, unit = "km"), "sum", na.rm = T)
 pixel_N2025 = cellSize(NDTI_N2025c, unit = "km")
-classi_N2025 = zonal(pixel_N2025, NDTI_N2025c, fun = "sum", na.rn = T)
+classi_N2025 = zonal(pixel_N2025, NDTI_N2025c, fun = "sum", na.rm = T)
 classi_N2025
 perc_N2025 = classi_N2025$area * 100 / sum(classi_N2025$area)
 
